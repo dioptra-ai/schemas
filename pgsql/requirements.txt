@@ -1,0 +1,7 @@
+alembic==1.8.1
+greenlet==1.1.2
+Mako==1.2.1
+MarkupSafe==2.1.1
+psycopg2-binary==2.9.3
+SQLAlchemy==1.4.39
+uuid==1.30
