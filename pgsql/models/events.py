@@ -11,4 +11,4 @@ class Event(Base):
     __time = Column(DateTime(timezone=True), nullable=False, default=datetime.datetime.utcnow)
 
     def __repr__(self):
-        return f"Event(uuid={self.uuid!r}, __time={self.__time!r})"
+        return f"Event(uuid={self.uuid}, __time={self.__time})"
