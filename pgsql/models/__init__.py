@@ -1,3 +1,3 @@
 from .base import Base
 
-from . import events
+from . import event
