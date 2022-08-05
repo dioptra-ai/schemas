@@ -1,24 +1,36 @@
 """${message}
 
-Revision ID: ${up_revision}
-Revises: ${down_revision | comma,n}
-Create Date: ${create_date}
-
+Created at: ${create_date}
 """
+
+revision = ${repr(up_revision)}
+# To prune migrations prior to this one, set this down_revision to None
+# and delete the files of the prior revisions.
+down_revision = ${repr(down_revision)}
+
 from alembic import op
 import sqlalchemy as sa
 ${imports if imports else ""}
+from alembic import context
 
-# revision identifiers, used by Alembic.
-revision = ${repr(up_revision)}
-down_revision = ${repr(down_revision)}
-branch_labels = ${repr(branch_labels)}
-depends_on = ${repr(depends_on)}
+def upgrade():
+    schema_upgrades()
+    data_upgrades()
 
+def downgrade():
+    data_downgrades()
+    schema_downgrades()
 
-def upgrade() -> None:
+def schema_upgrades():
     ${upgrades if upgrades else "pass"}
 
-
-def downgrade() -> None:
+def schema_downgrades():
     ${downgrades if downgrades else "pass"}
+
+def data_upgrades():
+    """Add any optional data upgrade migrations here!"""
+    pass
+
+def data_downgrades():
+    """Add any optional data downgrade migrations here!"""
+    pass
