@@ -1,0 +1,9 @@
+apiVersion: v2
+name: pgsql-schemas
+description: Management of PostgreSQL schemas
+
+type: application
+
+version: 0.1.1
+
+appVersion: "0.0.1"

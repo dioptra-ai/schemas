@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: migrate-pgsql-job
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    spec:
+      containers:
+      - name: migrate-pgsql-job
+        image: "641017132295.dkr.ecr.us-east-2.amazonaws.com/migrate-pgsql-job:{{ .Values.tag }}"
+        env:
+          - name: RELEASE_NAME
+            value: {{ .Release.Name }}
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: dioptra-postgres
+                key: password
+          - name: POSTGRES_URL
+            value: "postgresql://{{ .Values.pgUsername }}:$(POSTGRES_PASSWORD)@{{ .Values.pgEndpoint }}:{{ .Values.pgPort }}/{{ .Values.pgDatabase }}"
+      restartPolicy: Never
