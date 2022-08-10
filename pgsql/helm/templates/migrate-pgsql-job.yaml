@@ -20,6 +20,6 @@ spec:
               secretKeyRef:
                 name: dioptra-postgres
                 key: password
-          - name: POSTGRES_URL
+          - name: MIGRATION_POSTGRES_URL
             value: "postgresql://{{ .Values.pgUsername }}:$(POSTGRES_PASSWORD)@{{ .Values.pgEndpoint }}:{{ .Values.pgPort }}/{{ .Values.pgDatabase }}"
       restartPolicy: Never

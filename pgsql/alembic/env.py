@@ -9,7 +9,7 @@ from alembic import context
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-portgres_url = os.environ.get("POSTGRES_URL", "postgresql://dioptra:dioptraai@localhost/dioptra")
+portgres_url = os.environ.get("MIGRATION_POSTGRES_URL", "postgresql://dioptra:dioptraai@localhost/dioptra")
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
