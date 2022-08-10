@@ -3,7 +3,7 @@
 ## Prerequisites
 1. install dependencies with `pip install -r requirements.txt`
 
-## Modify Schemas and migrate DB:
+## Migrating the Database:
 
 1. Modify schemas in the `models/` directory
 1. Run the following command to generate the migration scripts
