@@ -10,6 +10,7 @@ class Event(Base):
 
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     __time = Column('__time', DateTime(timezone=True), nullable=False, default=datetime.datetime.utcnow)
+    processing_timestamp = Column(DateTime(timezone=True), nullable=False, default=datetime.datetime.utcnow)
     request_id = Column(String())
     organization_id = Column(String(), nullable=False)
 
