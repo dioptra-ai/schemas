@@ -26,7 +26,7 @@ class Event(Base):
     model_type = Column(String())
     input_type = Column(String())
 
-    tags = Column(JSONB())
+    tags = Column('tags', JSONB())
     features = Column(JSONB())
     image_metadata = Column(JSONB())
     video_metadata = Column(JSONB())
