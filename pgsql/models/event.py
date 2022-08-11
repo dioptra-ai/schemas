@@ -2,7 +2,7 @@ import datetime
 import uuid
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import synonym
-from sqlalchemy import Column, DateTime, String, Float
+from sqlalchemy import Column, DateTime, String, Float, Boolean
 
 from .base import Base
 
@@ -37,6 +37,9 @@ class Event(Base):
     prediction = Column(JSONB())
     confidence = Column(Float())
     embeddings = Column(String())
+
+    dataset_id = Column(String())
+    is_bbox_row = Column(Boolean(), default=False)
 
     def __repr__(self):
         return f"Event(uuid={self.uuid!r}, __time={self.__time!r})"
