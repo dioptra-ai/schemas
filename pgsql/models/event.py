@@ -36,7 +36,13 @@ class Event(Base):
     groundtruth = Column(JSONB())
     prediction = Column(JSONB())
     confidence = Column(Float())
+    margin_of_confidence = Column(Float())
+    ratio_of_confidence = Column(Float())
     embeddings = Column(String())
+    original_embeddings = Column(String())
+    logits = Column(String())
+    entropy = Column(Float())
+    iou = Column(Float())
 
     dataset_id = Column(String())
     benchmark_id = Column(String())
