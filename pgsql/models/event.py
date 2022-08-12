@@ -39,6 +39,7 @@ class Event(Base):
     embeddings = Column(String())
 
     dataset_id = Column(String())
+    benchmark_id = Column(String())
     is_bbox_row = Column(Boolean(), default=False)
 
     def __repr__(self):
