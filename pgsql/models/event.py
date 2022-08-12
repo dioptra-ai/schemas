@@ -42,5 +42,7 @@ class Event(Base):
     benchmark_id = Column(String())
     is_bbox_row = Column(Boolean(), default=False)
 
+    text = Column(String())
+
     def __repr__(self):
         return f"Event(uuid={self.uuid!r}, __time={self.__time!r})"
