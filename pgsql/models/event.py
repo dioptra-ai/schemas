@@ -43,6 +43,7 @@ class Event(Base):
     logits = Column(String())
     entropy = Column(Float())
     iou = Column(Float())
+    f1_score = Column(Float())
 
     dataset_id = Column(String())
     benchmark_id = Column(String())
