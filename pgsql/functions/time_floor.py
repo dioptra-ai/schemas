@@ -2,7 +2,7 @@ from alembic_utils.pg_function import PGFunction
 
 time_floor = PGFunction(
     schema='public',
-    signature='TIME_FLOOR(t timestamp with time zone, i interval)',
+    signature='time_floor(t timestamp with time zone, i interval)',
     definition="""
         RETURNS timestamp with time zone AS 
         $$

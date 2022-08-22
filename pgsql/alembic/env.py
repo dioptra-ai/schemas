@@ -12,6 +12,15 @@ from alembic_utils.replaceable_entity import register_entities
 config = context.config
 portgres_url = os.environ.get("MIGRATION_POSTGRES_URL", "postgresql://dioptra:dioptraai@localhost/dioptra")
 
+try:
+    answer = input(f'Connecting to: {portgres_url}. Continue (type "YES")? ')
+
+    if answer != "YES":
+        print("Aborting")
+        exit(1)
+except EOFError:
+    print(f'No stdin, continuing...')
+
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
