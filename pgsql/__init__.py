@@ -2,9 +2,9 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-POSTGRES_USER = os.environ['POSTGRES_USER']
-POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
-POSTGRES_HOST = os.environ['POSTGRES_HOST']
+POSTGRES_USER = os.environ.get('POSTGRES_USER')
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
 POSTGRES_PORT = os.environ.get('POSTGRES_PORT', 5432)
 POSTGRES_DATABASE = os.environ.get('POSTGRES_DATABASE', 'dioptra')
 
