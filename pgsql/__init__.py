@@ -15,7 +15,9 @@ engine = create_engine(
     future=True
 )
 # See https://docs.sqlalchemy.org/en/14/core/pooling.html#pooling-multiprocessing
-engine.dispose(close=False)
+# Doesn't seem to be working at preventing this:
+# sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL error: decryption failed or bad record mac
+engine.dispose()
 
 def get_session():
 
