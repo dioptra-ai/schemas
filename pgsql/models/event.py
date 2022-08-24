@@ -25,6 +25,7 @@ class Event(Base):
     model_version = Column(String())
     model_type = Column(String())
     input_type = Column(String())
+    committed = Column(Boolean(), nullable=True)
 
     tags = Column(JSONB())
     features = Column(JSONB())
