@@ -51,4 +51,4 @@ class Event(Base):
     text = Column(String())
 
     def __repr__(self):
-        return f"Event(uuid={self.uuid!r}, __time={self.__time!r})"
+        return f"Event(uuid={self.uuid!r}, timestamp={self.timestamp!r})"
