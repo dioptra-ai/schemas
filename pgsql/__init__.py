@@ -10,7 +10,9 @@ POSTGRES_DATABASE = os.environ.get('POSTGRES_DATABASE', 'dioptra')
 
 engine = create_engine(
     f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}",
-    # Outputs all SQL queries for debugging
+    # Outputs all SQL queries for debugging.
+    # To log queries in consumer applications instead of using this, use the following:
+    # @see https://docs.sqlalchemy.org/en/14/core/engines.html#configuring-logging
     # echo=True,
     future=True,
     pool_size=1024,

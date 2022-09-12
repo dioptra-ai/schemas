@@ -1,7 +1,7 @@
 # PostegreSQL schemas
 
 ## Development Prerequisites
-1. Locally install the dependencies with `source .venv/bin/activate && pip install -r requirements.txt`
+1. Locally install the dependencies with `virtualenv .venv && source .venv/bin/activate && pip install -r requirements.txt`
 
 ## Creating a New Migration
 1. Modify schemas in the `models/` or `functions/` directory

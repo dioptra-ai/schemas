@@ -14,8 +14,7 @@ class Event(Base):
 
     # Default fields
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    __time = Column('__time', DateTime(timezone=True), nullable=False, default=datetime.datetime.utcnow)
-    timestamp = synonym('__time')
+    timestamp = Column('timestamp', DateTime(timezone=True), nullable=False, default=datetime.datetime.utcnow)
     processing_timestamp = Column(DateTime(timezone=True), nullable=False, default=datetime.datetime.utcnow)
 
     # Optional fields
@@ -25,7 +24,6 @@ class Event(Base):
     model_version = Column(String())
     model_type = Column(String())
     input_type = Column(String())
-    committed = Column(Boolean(), nullable=True)
 
     tags = Column(JSONB())
     features = Column(JSONB())
