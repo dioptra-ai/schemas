@@ -1,0 +1,3 @@
+pgUsername: postgres
+pgEndpoint: prod-postresql-cluster.cluster-c58vxsd50oik.us-east-2.rds.amazonaws.com
+pgPort: 5432
