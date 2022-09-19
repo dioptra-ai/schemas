@@ -55,5 +55,7 @@ class Event(Base):
 
 Index('events_timestamp_index', Event.timestamp, postgresql_using='brin')
 Index('events_organization_id_index', Event.organization_id)
+Index('events_model_id_index', Event.model_id)
+Index('events_dataset_id_index', Event.dataset_id)
 
 # TODO: Partition by time and maybe by organization_id: https://aws.amazon.com/blogs/database/designing-high-performance-time-series-data-tables-on-amazon-rds-for-postgresql/

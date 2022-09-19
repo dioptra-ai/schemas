@@ -10,8 +10,8 @@
 4. Review the generated scripts in `alembic/versions` to make sure they are correct and add any data migration
 5. ***If you set `MIGRATION_POSTGRES_URL`, unset it to avoid migrating a non-local DB.*** 
 6. Try your migration locally: `alembic upgrade head`. 
-7. Iterate on the migration:
-    * if the migration succeeded, downgrade with `alembic downgrade -1`
+7. If you need to iterage on the migration:
+    * if the migration succeeded, you can downgrade with `alembic downgrade -1`
     * restart from step 1
     * see the documentation to use alembic: https://alembic.sqlalchemy.org/en/latest/tutorial.html
 8. When it works, push all changes in a single commit
