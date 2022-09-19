@@ -76,3 +76,16 @@ workflows:
             branches:
               only:
                 - main
+      - helm-upgrade:
+          release-name: migrate-pgsql-job
+          chart: pgsql/helm
+          cluster-name: dioptra-prod-eks
+          helm-values: ./pgsql/helm/values.prod.yaml
+          image-tag: <<pipeline.git.revision>>
+          context:
+            - aws-creds
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
