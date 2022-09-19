@@ -24,8 +24,8 @@ engine = create_engine(
 # sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL error: decryption failed or bad record mac
 # And dince we're using werkzeug workers anyway, this is probably already in the child process anyway
 # so i'm not sure if it's even useful.
-engine.dispose(close=False)
 
 def get_session():
+    engine.dispose(close=False)
 
     return Session(engine)
