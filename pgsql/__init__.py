@@ -7,6 +7,7 @@ POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
 POSTGRES_PORT = os.environ.get('POSTGRES_PORT', 5432)
 POSTGRES_DATABASE = os.environ.get('POSTGRES_DATABASE', 'dioptra')
+POSTGRES_MAX_CONNECTIONS = int(os.environ.get('POSTGRES_MAX_CONNECTIONS', 2048))
 
 def get_session():
 
@@ -18,7 +19,7 @@ def get_session():
             # @see https://docs.sqlalchemy.org/en/14/core/engines.html#configuring-logging
             # echo=True,
             future=True,
-            pool_size=1024,
-            max_overflow=1024,
+            pool_size=POSTGRES_MAX_CONNECTIONS / 2,
+            max_overflow=POSTGRES_MAX_CONNECTIONS / 2,
         )
     )
