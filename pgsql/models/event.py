@@ -43,6 +43,7 @@ class Event(Base):
     entropy = Column(Float())
     iou = Column(Float())
     f1_score = Column(Float())
+    metrics = Column(JSONB())
 
     dataset_id = Column(String())
     benchmark_id = Column(String())

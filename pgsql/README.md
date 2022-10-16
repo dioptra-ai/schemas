@@ -3,6 +3,10 @@
 ## Development Prerequisites
 1. Locally install the dependencies with `virtualenv .venv && source .venv/bin/activate && pip install -r requirements.txt`
 
+## Check history and deployed migrations
+1. `alembic history`
+2. `alembic current`
+
 ## Creating a New Migration
 1. Modify schemas in the `models/` or `functions/` directory
 3. Run the following command to generate the migration scripts
