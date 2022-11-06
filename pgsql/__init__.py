@@ -32,3 +32,13 @@ def run_sql_query(sql_query):
 
     with engine.connect() as conn:
         return conn.execute(text(sql_query))
+
+def get_sql_engine():
+
+    return create_engine(
+        f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}",
+        # echo=True,
+        future=True,
+        pool_size=POSTGRES_MAX_CONNECTIONS / 2,
+        max_overflow=POSTGRES_MAX_CONNECTIONS / 2,
+    )
