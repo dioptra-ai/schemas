@@ -56,6 +56,7 @@ class Event(Base):
 
 Index('events_timestamp_index', Event.timestamp, postgresql_using='brin')
 Index('events_organization_id_index', Event.organization_id)
+Index('events_request_id_index', Event.request_id)
 Index('events_model_id_index', Event.model_id)
 Index('events_dataset_id_index', Event.dataset_id)
 
