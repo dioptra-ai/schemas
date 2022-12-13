@@ -8,7 +8,7 @@ POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
 POSTGRES_PORT = os.environ.get('POSTGRES_PORT', 5432)
 POSTGRES_DATABASE = os.environ.get('POSTGRES_DATABASE', 'dioptra')
 POSTGRES_MAX_CONNECTIONS = int(os.environ.get('POSTGRES_MAX_CONNECTIONS', 2048))
-POSTGRES_ECHO = os.environ.get('POSTGRES_ECHO', False)
+POSTGRES_ECHO = os.environ.get('POSTGRES_ECHO', 'false') == 'true'
 
 # If this pops up in production sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
 # try this: https://www.roelpeters.be/error-ssl-syscall-error-eof-detected/
