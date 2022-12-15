@@ -15,7 +15,7 @@ POSTGRES_ECHO = os.environ.get('POSTGRES_ECHO', 'false') == 'true'
 
 _sql_engine = create_engine(
     f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}",
-    echo=POSTGRES_ECHO,
+    echo=bool(POSTGRES_ECHO),
     future=True,
     pool_size=POSTGRES_MAX_CONNECTIONS / 2,
     max_overflow=POSTGRES_MAX_CONNECTIONS / 2,
