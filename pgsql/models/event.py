@@ -1,7 +1,7 @@
 import datetime
 import uuid
 from sqlalchemy.dialects.postgresql import UUID, JSONB
-from sqlalchemy import Column, DateTime, String, Float, Boolean
+from sqlalchemy import Column, DateTime, String, Float, Boolean, text
 from sqlalchemy.schema import Index
 
 from .base import Base
@@ -59,5 +59,9 @@ Index('events_organization_id_index', Event.organization_id)
 Index('events_request_id_index', Event.request_id)
 Index('events_model_id_index', Event.model_id)
 Index('events_dataset_id_index', Event.dataset_id)
+Index('events_features_index', Event.features)
+Index('events_tags_index', Event.tags)
+Index('events_prediction_index', text("prediction->>'class_name'"))
+Index('events_groundtruth_index', text("groundtruth->>'class_name'"))
 
 # TODO: Partition by time and maybe by organization_id: https://aws.amazon.com/blogs/database/designing-high-performance-time-series-data-tables-on-amazon-rds-for-postgresql/
