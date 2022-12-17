@@ -31,6 +31,7 @@ jobs:
       - checkout
       - helm/upgrade-helm-chart:
           atomic: true
+          timeout: 30m
           chart: << parameters.chart >>
           helm-version: v3.6.0
           release-name: << parameters.release-name >>
