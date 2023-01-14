@@ -1,5 +1,5 @@
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import Column, DateTime, String, text, func
+from sqlalchemy import Column, DateTime, String, Boolean, text, func
 from sqlalchemy.schema import Index
 
 from .base import Base
@@ -12,6 +12,7 @@ class Dataset(Base):
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
     created_by = Column(String(), nullable=False)
     display_name = Column(String())
+    is_current = Column(Boolean(), nullable=False, server_default=text('true'))
 
     def __repr__(self):
         return f"Dataset(uuid={self.uuid!r}, created_at={self.timestamp!r})"
