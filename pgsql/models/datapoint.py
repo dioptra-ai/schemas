@@ -7,14 +7,14 @@ from .base import Base
 class Datapoint(Base):
     __tablename__ = "datapoints"
 
-    uuid = Column(UUID(as_uuid=True), primary_key=True, server_default=text('gen_random_uuid()'))
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=text('gen_random_uuid()'))
     organization_id = Column(String(), nullable=False)
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
 
     request_id = Column(String(), nullable=False)
 
     def __repr__(self):
-        return f"Datapoint(uuid={self.uuid!r}, created_at={self.timestamp!r})"
+        return f"Datapoint(id={self.id!r}, created_at={self.timestamp!r})"
 
 Index('datapoints_organization_id_index', Datapoint.organization_id)
 Index('datapoints_request_id_index', Datapoint.request_id)
