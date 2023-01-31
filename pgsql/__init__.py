@@ -29,11 +29,11 @@ try:
     POSTGRES_HOST = os.environ.get('POSTGRES_HOST', postgres_credentials['host'])
     POSTGRES_PORT = os.environ.get('POSTGRES_PORT', postgres_credentials['port'])
 except Exception as e:
-    print(f'WARNING: Failed to get postgres credentials from AWS Secrets Manager: {e}. Falling back to environment variables, but this should be removed...')
+    print(f'WARNING: Failed to get postgres credentials from AWS Secrets Manager: {e}. Falling back to environment variables...')
     POSTGRES_USER = os.environ['POSTGRES_USER']
     POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
     POSTGRES_HOST = os.environ['POSTGRES_HOST']
-    POSTGRES_PORT = os.environ['POSTGRES_PORT']
+    POSTGRES_PORT = os.environ.get('POSTGRES_PORT', 5432)
 else:
     print('Successfully got postgres credentials from AWS Secrets Manager')
 
