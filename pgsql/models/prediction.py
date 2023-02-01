@@ -1,5 +1,5 @@
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import Column, DateTime, String, text, Enum, func
+from sqlalchemy.dialects.postgresql import UUID, ARRAY, JSONB
+from sqlalchemy import Column, DateTime, String, text, Enum, func, Float
 from sqlalchemy.schema import ForeignKey, UniqueConstraint, Index
 
 from .base import Base
@@ -13,7 +13,15 @@ class Prediction(Base):
     datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id'), nullable=False)
     task_type = Column(Enum(TaskType), nullable=False)
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
-
+    class_name = Column(String(), nullable=True)
+    class_names = Column(ARRAY(String()), nullable=True)
+    confidence = Column(Float(), nullable=True)
+    confidences = Column(ARRAY(Float()), nullable=True)
+    top = Column(Float(), nullable=True)
+    left = Column(Float(), nullable=True)
+    height = Column(Float(), nullable=True)
+    width = Column(Float(), nullable=True)
+    metrics = Column(JSONB, nullable=True)
     # User-provided model and version identification.
     # If we want our own ids later, we can use "model" and "model_version" as foreign keys and remove this.
     model_name = Column(String(), nullable=True)
