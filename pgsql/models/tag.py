@@ -1,6 +1,6 @@
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import Column, DateTime, String, Boolean, text, func
-from sqlalchemy.schema import Index, ForeignKey
+from sqlalchemy.schema import Index, ForeignKey, UniqueConstraint
 
 from .base import Base
 
@@ -20,3 +20,6 @@ Index('tags_organization_id_index', Tag.organization_id)
 Index('tags_datapoint_index', Tag.datapoint)
 Index('tags_name_index', Tag.name)
 Index('tags_value_index', Tag.value)
+
+# Only one tag per datapoint with a given name
+UniqueConstraint('datapoint', 'name', name='tags_datapoint_name_unique')
