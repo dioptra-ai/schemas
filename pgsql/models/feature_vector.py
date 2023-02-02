@@ -14,7 +14,7 @@ class FeatureVector(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text('gen_random_uuid()'))
     organization_id = Column(String(), nullable=False)
-    name = Column(Enum(FeatureVectorType), nullable=False)
+    type = Column(Enum(FeatureVectorType), nullable=False)
     datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id'), nullable=True)
     prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id'), nullable=True)
     value = Column(JSONB(), nullable=True)
@@ -54,10 +54,10 @@ class FeatureVector(Base):
 
 Index('feature_vector_organization_id_index', FeatureVector.organization_id)
 
-# There should be only one feature vector per datapoint, name and model_name.
-UniqueConstraint(FeatureVector.datapoint, FeatureVector.model_name, FeatureVector.name, name='feature_vectors_datapoint_model_name_unique')
-# There should be only one feature vector per prediction, name and model_name.
-UniqueConstraint(FeatureVector.prediction, FeatureVector.model_name, FeatureVector.name, name='feature_vectors_prediction_model_name_unique')
+# There should be only one feature vector per datapoint, type and model_name.
+UniqueConstraint(FeatureVector.datapoint, FeatureVector.model_name, FeatureVector.type, name='feature_vectors_datapoint_model_name_type_unique')
+# There should be only one feature vector per prediction, type and model_name.
+UniqueConstraint(FeatureVector.prediction, FeatureVector.model_name, FeatureVector.type, name='feature_vectors_prediction_model_name_type_unique')
 
 # Either datapoint or prediction should be set.
 CheckConstraint(
