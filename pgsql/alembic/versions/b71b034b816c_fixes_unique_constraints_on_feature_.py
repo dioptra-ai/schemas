@@ -6,7 +6,7 @@ Created at: 2023-02-01 16:22:03.679317
 revision = 'b71b034b816c'
 # To prune migrations prior to this one, set this down_revision to None
 # and delete the files of the prior revisions.
-down_revision = '5a42066fc3e6'
+down_revision = 'd2f23bfb8812'
 
 from alembic import op
 import sqlalchemy as sa
