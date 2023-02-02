@@ -35,3 +35,5 @@ class Datapoint(Base):
         return f"Datapoint(id={self.id!r}, created_at={self.created_at!r}, type={self.type!r})"
 
 Index('datapoints_organization_id_index', Datapoint.organization_id)
+Index('datapoints_request_id_index', Datapoint.request_id)
+UniqueConstraint(Datapoint.organization_id, Datapoint.request_id, name='datapoints_organization_id_request_id_unique')
