@@ -11,7 +11,7 @@ class Tag(Base):
     organization_id = Column(String(), nullable=False)
     name = Column(String(), nullable=False)
     value = Column(String(), nullable=False)
-    datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id'), nullable=False)
+    datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id', ondelete='CASCADE'), nullable=False)
 
     def __repr__(self):
         return f"Tag(id={self.id!r}, name={self.name!r}, value={self.value!r}, datapoint={self.datapoint!r})"
