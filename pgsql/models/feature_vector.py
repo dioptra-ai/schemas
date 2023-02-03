@@ -15,8 +15,8 @@ class FeatureVector(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text('gen_random_uuid()'))
     organization_id = Column(String(), nullable=False)
     type = Column(Enum(FeatureVectorType), nullable=False)
-    datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id'), nullable=True)
-    prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id'), nullable=True)
+    datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id', ondelete='CASCADE'), nullable=True)
+    prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id', ondelete='CASCADE'), nullable=True)
     value = Column(JSONB(), nullable=True)
 
     # Ideas:

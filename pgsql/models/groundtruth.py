@@ -15,7 +15,7 @@ class GroundTruth(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text('gen_random_uuid()'))
     organization_id = Column(String(), nullable=False)
-    datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id'), nullable=False)
+    datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id', ondelete='CASCADE'), nullable=False)
     task_type = Column(Enum(TaskType), nullable=False)
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
 
