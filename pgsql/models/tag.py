@@ -22,4 +22,4 @@ Index('tags_name_index', Tag.name)
 Index('tags_value_index', Tag.value)
 
 # Only one tag per datapoint with a given name
-UniqueConstraint('datapoint', 'name', name='tags_datapoint_name_unique')
+UniqueConstraint(Tag.datapoint, Tag.name, name='tags_datapoint_name_unique')

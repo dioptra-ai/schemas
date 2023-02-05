@@ -24,7 +24,6 @@ class GroundTruth(Base):
     left = Column(Float(), nullable=True)
     height = Column(Float(), nullable=True)
     width = Column(Float(), nullable=True)
-    metrics = Column(JSONB(), nullable=True)
 
     def __repr__(self):
         return f"GroundTruth(id={self.id!r}, datapoint={self.datapoint!r})"
