@@ -16,11 +16,6 @@ class DatapointType(enum.Enum):
 class Datapoint(Base):
     __tablename__ = "datapoints"
 
-    # This so that client-side unpersisted objects receive a UUID.
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        self.id = uuid.uuid4()
-
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text('gen_random_uuid()'))
     organization_id = Column(String(), nullable=False)
     # TODO: migrate existing event data, populate this and and make it non-nullable.
