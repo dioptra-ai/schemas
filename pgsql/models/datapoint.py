@@ -22,6 +22,7 @@ class Datapoint(Base):
     type = Column(Enum(DatapointType), nullable=True)
     metadata_ = Column('metadata', JSONB, nullable=True)
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
+    text = Column(String(), nullable=True)
 
     # TODO: remove this later.
     request_id = Column(String(), nullable=True)
