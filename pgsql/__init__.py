@@ -67,7 +67,12 @@ def get_session():
 
     return Session(get_sql_engine())
 
-def run_sql_query(sql_query):
+def run_sql_query(sql_query, commit=False):
 
     with get_sql_engine().connect() as conn:
-        return conn.execute(text(sql_query))
+        result = conn.execute(text(sql_query))
+
+        if commit:
+            conn.commit()
+        
+        return result
