@@ -63,13 +63,23 @@ def get_sql_engine():
 
     return _sql_engine
 
+def new_sql_engine(host, port):
+
+    return create_engine(
+        f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{host}:{port}/{POSTGRES_DATABASE}",
+        echo=bool(POSTGRES_ECHO),
+        future=True,
+        pool_size=POSTGRES_MAX_CONNECTIONS / 2,
+        max_overflow=POSTGRES_MAX_CONNECTIONS / 2,
+    )
+
 def get_session():
 
     return Session(get_sql_engine())
 
-def run_sql_query(sql_query, commit=False):
+def run_sql_query(sql_query, commit=False, engine=_sql_engine):
 
-    with get_sql_engine().connect() as conn:
+    with engine.connect() as conn:
         result = conn.execute(text(sql_query))
 
         if commit:
