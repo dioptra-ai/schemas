@@ -63,7 +63,7 @@ workflows:
           filters:
             branches:
               only:
-                - main
+                - dev
       - helm-upgrade:
           release-name: migrate-pgsql-job
           chart: pgsql/helm
@@ -77,7 +77,7 @@ workflows:
           filters:
             branches:
               only:
-                - main
+                - dev
       - helm-upgrade:
           release-name: migrate-pgsql-job
           chart: pgsql/helm
