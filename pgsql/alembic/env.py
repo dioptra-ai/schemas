@@ -10,16 +10,19 @@ from alembic_utils.replaceable_entity import register_entities
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-portgres_url = os.environ.get("MIGRATION_POSTGRES_URL", "postgresql://dioptra:dioptraai@localhost/dioptra")
+portgres_url = "postgresql://dioptra:dioptraai@localhost/dioptra"
 
-try:
-    answer = input(f'Connecting to: {portgres_url}. Continue (type "YES")? ')
+if 'MIGRATION_POSTGRES_URL' in os.environ:
+    try:
+        portgres_url = os.environ['MIGRATION_POSTGRES_URL']
 
-    if answer != "YES":
-        print("Aborting")
-        exit(1)
-except EOFError:
-    print(f'No stdin, continuing...')
+        answer = input(f'WARNING: MIGRATION_POSTGRES_URL IS SET, OPERATING ON NON-LOCAL POSTGRES {portgres_url}.\nARE YOU SURE? (type "YES") ')
+
+        if answer != "YES":
+            print("Aborting")
+            exit(1)
+    except EOFError:
+        print(f'No stdin, continuing...')
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
