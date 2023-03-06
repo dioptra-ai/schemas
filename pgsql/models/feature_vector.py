@@ -17,7 +17,7 @@ class FeatureVector(Base):
     type = Column(Enum(FeatureVectorType), nullable=False)
     datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id', ondelete='CASCADE'), nullable=True)
     prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id', ondelete='CASCADE'), nullable=True)
-    value = Column(JSONB(), nullable=True)
+    encoded_value = Column(String(), nullable=True)
 
     # Ideas:
     # Store each vector in its own S3 file.
