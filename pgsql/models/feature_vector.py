@@ -53,6 +53,11 @@ class FeatureVector(Base):
         return f"FeatureVector(id={self.id!r}, datapoint={self.datapoint!r}, url={self.url!r})"
 
 Index('feature_vector_organization_id_index', FeatureVector.organization_id)
+Index('feature_vector_type_index', FeatureVector.type)
+Index('feature_vector_model_name_index', FeatureVector.model_name)
+Index('feature_vector_datapoint_index', FeatureVector.datapoint)
+Index('feature_vector_prediction_index', FeatureVector.prediction)
+
 
 # There should be only one feature vector per datapoint, type and model_name.
 UniqueConstraint(FeatureVector.datapoint, FeatureVector.model_name, FeatureVector.type, name='feature_vectors_datapoint_model_name_type_unique')

@@ -31,10 +31,4 @@ class GroundTruth(Base):
 Index('groundtruths_organization_id_index', GroundTruth.organization_id)
 Index('groundtruths_datapoint_index', GroundTruth.datapoint)
 Index('groundtruths_task_type_index', GroundTruth.task_type)
-Index('groundtruths_created_at_index', GroundTruth.created_at)
 Index('groundtruths_class_name_index', GroundTruth.class_name)
-Index('groundtruths_top_index', GroundTruth.top)
-Index('groundtruths_left_index', GroundTruth.left)
-Index('groundtruths_height_index', GroundTruth.height)
-Index('groundtruths_width_index', GroundTruth.width)
-

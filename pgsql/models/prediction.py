@@ -32,16 +32,8 @@ class Prediction(Base):
 Index('predictions_organization_id_index', Prediction.organization_id)
 Index('predictions_datapoint_index', Prediction.datapoint)
 Index('predictions_task_type_index', Prediction.task_type)
-Index('predictions_created_at_index', Prediction.created_at)
 Index('predictions_class_name_index', Prediction.class_name)
-Index('predictions_class_names_index', Prediction.class_names)
 Index('predictions_confidence_index', Prediction.confidence)
-Index('predictions_confidences_index', Prediction.confidences)
-Index('predictions_top_index', Prediction.top)
-Index('predictions_left_index', Prediction.left)
-Index('predictions_width_index', Prediction.width)
-Index('predictions_height_index', Prediction.height)
-Index('predictions_metrics_index', Prediction.metrics)
 Index('predictions_model_name_index', Prediction.model_name)
 
 # There should be only one prediction per datapoint and model_name
