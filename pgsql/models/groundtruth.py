@@ -9,6 +9,7 @@ class TaskType(enum.Enum):
     OBJECT_DETECTION = "OBJECT_DETECTION"
     CLASSIFICATION = "CLASSIFICATION"
     NER = "NER"
+    SEGMENTATION = "SEGMENTATION"
 
 class GroundTruth(Base):
     __tablename__ = "groundtruths"
