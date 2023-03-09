@@ -1,5 +1,5 @@
 import enum
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.dialects.postgresql import UUID, ARRAY, JSONB
 from sqlalchemy import Column, String, text, Enum, func, DateTime, Float
 from sqlalchemy.schema import ForeignKey, Index
 
@@ -21,6 +21,7 @@ class GroundTruth(Base):
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
 
     class_name = Column(String(), nullable=True)
+    segmentation_class_mask = Column(JSONB, nullable=True)
     top = Column(Float(), nullable=True)
     left = Column(Float(), nullable=True)
     height = Column(Float(), nullable=True)
