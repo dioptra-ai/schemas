@@ -17,7 +17,7 @@ class FeatureVector(Base):
     type = Column(Enum(FeatureVectorType), nullable=False)
     datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id', ondelete='CASCADE'), nullable=True)
     prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id', ondelete='CASCADE'), nullable=True)
-    value = Column(JSONB(), nullable=True)
+    encoded_value = Column(String(), nullable=True)
 
     # Ideas:
     # Store each vector in its own S3 file.
@@ -47,12 +47,18 @@ class FeatureVector(Base):
 
     # User-provided model and version identification.
     # If we want our own ids later, we can use "model" and "model_version" as foreign keys and remove this.
-    model_name = Column(String(), nullable=True)
+    # Using '' as default to have the unique constraint work in the absence of a model_name.
+    model_name = Column(String(), nullable=False, server_default=text("''"))
 
     def __repr__(self):
         return f"FeatureVector(id={self.id!r}, datapoint={self.datapoint!r}, url={self.url!r})"
 
 Index('feature_vector_organization_id_index', FeatureVector.organization_id)
+Index('feature_vector_type_index', FeatureVector.type)
+Index('feature_vector_model_name_index', FeatureVector.model_name)
+Index('feature_vector_datapoint_index', FeatureVector.datapoint)
+Index('feature_vector_prediction_index', FeatureVector.prediction)
+
 
 # There should be only one feature vector per datapoint, type and model_name.
 UniqueConstraint(FeatureVector.datapoint, FeatureVector.model_name, FeatureVector.type, name='feature_vectors_datapoint_model_name_type_unique')

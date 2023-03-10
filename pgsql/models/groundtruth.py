@@ -1,5 +1,5 @@
 import enum
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.dialects.postgresql import UUID, ARRAY, JSONB
 from sqlalchemy import Column, String, text, Enum, func, DateTime, Float
 from sqlalchemy.schema import ForeignKey, Index
 
@@ -9,6 +9,7 @@ class TaskType(enum.Enum):
     OBJECT_DETECTION = "OBJECT_DETECTION"
     CLASSIFICATION = "CLASSIFICATION"
     NER = "NER"
+    SEGMENTATION = "SEGMENTATION"
 
 class GroundTruth(Base):
     __tablename__ = "groundtruths"
@@ -20,6 +21,8 @@ class GroundTruth(Base):
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
 
     class_name = Column(String(), nullable=True)
+    class_names = Column(ARRAY(String()), nullable=True)
+    segmentation_class_mask = Column(JSONB, nullable=True)
     top = Column(Float(), nullable=True)
     left = Column(Float(), nullable=True)
     height = Column(Float(), nullable=True)
@@ -29,3 +32,6 @@ class GroundTruth(Base):
         return f"GroundTruth(id={self.id!r}, datapoint={self.datapoint!r})"
 
 Index('groundtruths_organization_id_index', GroundTruth.organization_id)
+Index('groundtruths_datapoint_index', GroundTruth.datapoint)
+Index('groundtruths_task_type_index', GroundTruth.task_type)
+Index('groundtruths_class_name_index', GroundTruth.class_name)
