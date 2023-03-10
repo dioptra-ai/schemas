@@ -21,6 +21,7 @@ class GroundTruth(Base):
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
 
     class_name = Column(String(), nullable=True)
+    class_names = Column(ARRAY(String()), nullable=True)
     segmentation_class_mask = Column(JSONB, nullable=True)
     top = Column(Float(), nullable=True)
     left = Column(Float(), nullable=True)
