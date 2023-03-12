@@ -90,7 +90,11 @@ def schema_upgrades():
     sa.UniqueConstraint('prediction', 'model_name', 'type', name='feature_vectors_prediction_model_name_type_unique')
     )
     op.create_index('feature_vector_organization_id_index', 'feature_vectors', ['organization_id'], unique=False)
-    op.add_column('datapoints', sa.Column('type', sa.Enum('IMAGE', 'VIDEO', 'AUDIO', 'TEXT', name='datapointtype'), nullable=True))
+
+    # https://stackoverflow.com/questions/68748093/i-cant-create-field-of-enum-type-sqlalchemy-exc-programmingerror-psycopg2-er
+    datapointtype_enum = postgresql.ENUM('IMAGE', 'VIDEO', 'AUDIO', 'TEXT', name='datapointtype', create_type=False)
+    datapointtype_enum.create(op.get_bind(), checkfirst=True)
+    op.add_column('datapoints', sa.Column('type', datapointtype_enum, nullable=True))
     op.add_column('datapoints', sa.Column('metadata', postgresql.JSONB(astext_type=sa.Text()), nullable=True))
     op.add_column('datapoints', sa.Column('text', sa.String(), nullable=True))
     op.alter_column('datapoints', 'request_id',
