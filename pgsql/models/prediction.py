@@ -26,7 +26,8 @@ class Prediction(Base):
     metrics = Column(JSONB, nullable=True)
     # User-provided model and version identification.
     # If we want our own ids later, we can use "model" and "model_version" as foreign keys and remove this.
-    model_name = Column(String(), nullable=True)
+    # Using '' as default to have the unique constraint work in the absence of a model_name.
+    model_name = Column(String(), nullable=False, server_default=text("''"))
 
     def __repr__(self):
         return f"Prediction(id={self.id!r}, datapoint={self.datapoint!r}, task_type={self.task_type!r})"
