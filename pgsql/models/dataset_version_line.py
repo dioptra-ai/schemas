@@ -1,6 +1,6 @@
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import Column
-from sqlalchemy.schema import ForeignKey
+from sqlalchemy.schema import ForeignKey, Index
 
 from .base import Base
 
@@ -13,3 +13,6 @@ class DatasetVersionLine(Base):
 
     def __repr__(self):
         return f"DatasetVersionLine(parent_uuid={self.parent_uuid!r}, child_uuid={self.child_uuid!r})"
+
+Index('dataset_version_lines_parent_uuid_index', DatasetVersionLine.parent_uuid)
+Index('dataset_version_lines_child_uuid_index', DatasetVersionLine.child_uuid)

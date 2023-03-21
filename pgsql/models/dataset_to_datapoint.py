@@ -16,3 +16,5 @@ class DatasetToDatapoint(Base):
         return f'DatasetToDatapoint(organization_id={self.organization_id!r}, dataset_version={self.dataset_version!r}, datapoint={self.datapoint!r}, created_at={self.created_at!r})'
 
 Index('dataset_to_datapoints_organization_id_index', DatasetToDatapoint.organization_id)
+Index('dataset_to_datapoints_datpoint_index', DatasetToDatapoint.datapoint)
+Index('dataset_to_datapoints_dataset_version_index', DatasetToDatapoint.dataset_version)
