@@ -17,7 +17,7 @@ class Prediction(Base):
     class_names = Column(ARRAY(String()), nullable=True)
     confidence = Column(Float(), nullable=True)
     confidences = Column(ARRAY(Float()), nullable=True)
-    segmentation_class_mask = Column(JSONB, nullable=True)
+    encoded_resized_segmentation_class_mask = Column(String(), nullable=True)
     encoded_segmentation_class_mask = Column(String(), nullable=True)
     top = Column(Float(), nullable=True)
     left = Column(Float(), nullable=True)
