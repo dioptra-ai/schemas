@@ -8,6 +8,8 @@ from .base import Base
 class FeatureVectorType(enum.Enum):
     EMBEDDINGS = "EMBEDDINGS"
     LOGITS = "LOGITS"
+    PXL_ENTROPY = "PXL_ENTROPY"
+    PXL_VARIANCE = "PXL_VARIANCE"
 
 class FeatureVector(Base):
     __tablename__ = "feature_vectors"
@@ -22,12 +24,12 @@ class FeatureVector(Base):
     # Ideas:
     # Store each vector in its own S3 file.
     #   Storage costs for 10M datapoints at 1MB each: 10,000GB * $0.023 = $230/month
-    #   S3 doesn't allow bulk operations (read/write), so we'd be charged for each request. 
+    #   S3 doesn't allow bulk operations (read/write), so we'd be charged for each request.
     #       Price for 100,000 vectors = 100,000 * 0.0004 / 1000 = $0.04
     #       Data transfer price $0 if in the same region.
     # Use S3 Select queries to get the feature vector from an S3 file with multiple vectors. Needs proper partitioning. Use this metadata to store a pointer to the S3 file.
     # Use pyarrow and parquet to store the vectors in S3.
-    # Use dynamodDB. 
+    # Use dynamodDB.
     #   Storage costs for 10M datapoints at 1MB each: $1000/month - $2,500/month depending on storage class (Standard vs Infrequent Access)
     #   Read costs for 100,000 * 1MB vectors eventually consistent: ~$10-$20 per request => oops...
     #
