@@ -24,6 +24,8 @@ class Datapoint(Base):
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
     text = Column(String(), nullable=True)
 
+    _preprocessor = None
+
     # TODO: remove this later.
     request_id = Column(String(), nullable=True)
 

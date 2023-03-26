@@ -30,8 +30,11 @@ class GroundTruth(Base):
     width = Column(Float(), nullable=True)
     metrics = Column(JSONB, nullable=True)
 
+    # Not persisted in the database.
+    _preprocessor = None
+
     def __repr__(self):
-        return f"GroundTruth(id={self.id!r}, datapoint={self.datapoint!r})"
+        return f"GroundTruth(id={self.id}, organization_id={self.organization_id}, datapoint={self.datapoint}, task_type={self.task_type}, created_at={self.created_at}, class_name={self.class_name}, class_names={self.class_names}, segmentation_class_mask?{self.segmentation_class_mask is not None}, encoded_segmentation_class_mask?{self.encoded_segmentation_class_mask is not None}, top={self.top}, left={self.left}, height={self.height}, width={self.width}, metrics={self.metrics})"
 
 Index('groundtruths_organization_id_index', GroundTruth.organization_id)
 Index('groundtruths_datapoint_index', GroundTruth.datapoint)
