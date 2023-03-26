@@ -38,3 +38,6 @@ Index('predictions_task_type_index', Prediction.task_type)
 Index('predictions_class_name_index', Prediction.class_name)
 Index('predictions_confidence_index', Prediction.confidence)
 Index('predictions_model_name_index', Prediction.model_name)
+
+# There should be only one prediction per datapoint and model_name
+UniqueConstraint(Prediction.datapoint, Prediction.model_name, name='predictions_datapoint_model_name_unique')
