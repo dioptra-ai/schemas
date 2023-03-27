@@ -3,7 +3,7 @@ import uuid
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy import Column, DateTime, String, text, func, Enum
 from sqlalchemy.orm import relationship
-from sqlalchemy.schema import Index, UniqueConstraint
+from sqlalchemy.schema import Index, UniqueConstraint, ForeignKey
 
 from .base import Base
 
@@ -18,6 +18,7 @@ class Datapoint(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text('gen_random_uuid()'))
     organization_id = Column(String(), nullable=False)
+    parent_datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id', ondelete='CASCADE'), nullable=True)
     # TODO: migrate existing event data, populate this and and make it non-nullable.
     type = Column(Enum(DatapointType), nullable=True)
     metadata_ = Column('metadata', JSONB, nullable=True)
@@ -34,4 +35,5 @@ class Datapoint(Base):
 
 Index('datapoints_organization_id_index', Datapoint.organization_id)
 Index('datapoints_request_id_index', Datapoint.request_id)
+Index('datapoints_parent_datapoint_index', Datapoint.parent_datapoint)
 UniqueConstraint(Datapoint.organization_id, Datapoint.request_id, name='datapoints_organization_id_request_id_unique')
