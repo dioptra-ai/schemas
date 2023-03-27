@@ -8,6 +8,11 @@ POSTGRES_DATABASE = os.environ.get('POSTGRES_DATABASE', 'dioptra')
 POSTGRES_MAX_CONNECTIONS = int(os.environ.get('POSTGRES_MAX_CONNECTIONS', 2048))
 POSTGRES_ECHO = os.environ.get('POSTGRES_ECHO', 'false') == 'true'
 
+if POSTGRES_ECHO:
+    import logging
+    logging.basicConfig()
+    logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+
 # If this pops up in production sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
 # try this: https://www.roelpeters.be/error-ssl-syscall-error-eof-detected/
 
@@ -39,7 +44,6 @@ else:
 
 _sql_engine = create_engine(
     f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}",
-    echo=bool(POSTGRES_ECHO),
     future=True,
     pool_size=POSTGRES_MAX_CONNECTIONS / 2,
     max_overflow=POSTGRES_MAX_CONNECTIONS / 2,
@@ -67,7 +71,6 @@ def new_sql_engine(host, port):
 
     return create_engine(
         f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{host}:{port}/{POSTGRES_DATABASE}",
-        echo=bool(POSTGRES_ECHO),
         future=True,
         pool_size=POSTGRES_MAX_CONNECTIONS / 2,
         max_overflow=POSTGRES_MAX_CONNECTIONS / 2,

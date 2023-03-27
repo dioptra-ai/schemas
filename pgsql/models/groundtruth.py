@@ -1,7 +1,7 @@
 import enum
 from sqlalchemy.dialects.postgresql import UUID, ARRAY, JSONB
 from sqlalchemy import Column, String, text, Enum, func, DateTime, Float
-from sqlalchemy.schema import ForeignKey, Index
+from sqlalchemy.schema import ForeignKey, Index, UniqueConstraint
 
 from .base import Base
 
@@ -40,3 +40,6 @@ Index('groundtruths_organization_id_index', GroundTruth.organization_id)
 Index('groundtruths_datapoint_index', GroundTruth.datapoint)
 Index('groundtruths_task_type_index', GroundTruth.task_type)
 Index('groundtruths_class_name_index', GroundTruth.class_name)
+
+# There should only be one groundtruth par datapoint per task_type
+UniqueConstraint(GroundTruth.datapoint, GroundTruth.task_type, name='groundtruths_datapoint_task_type_unique')
