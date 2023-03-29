@@ -17,8 +17,7 @@ class FeatureVector(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text('gen_random_uuid()'))
     organization_id = Column(String(), nullable=False)
     type = Column(Enum(FeatureVectorType), nullable=False)
-    datapoint = Column(UUID(as_uuid=True), ForeignKey('datapoints.id', ondelete='CASCADE'), nullable=True)
-    prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id', ondelete='CASCADE'), nullable=True)
+    prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id', ondelete='CASCADE'), nullable=False)
     encoded_value = Column(String(), nullable=True)
 
     # Ideas:
@@ -53,22 +52,13 @@ class FeatureVector(Base):
     model_name = Column(String(), nullable=False, server_default=text("''"))
 
     def __repr__(self):
-        return f"FeatureVector(id={self.id!r}, datapoint={self.datapoint!r}, url={self.url!r})"
+        return f"FeatureVector(id={self.id}, organization_id={self.organization_id}, type={self.type}, prediction={self.prediction}, encoded_value?{bool(self.encoded_value)}, metadata={self.metadata_}, model_name={self.model_name})"
 
 Index('feature_vector_organization_id_index', FeatureVector.organization_id)
 Index('feature_vector_type_index', FeatureVector.type)
 Index('feature_vector_model_name_index', FeatureVector.model_name)
-Index('feature_vector_datapoint_index', FeatureVector.datapoint)
 Index('feature_vector_prediction_index', FeatureVector.prediction)
 
 
-# There should be only one feature vector per datapoint, type and model_name.
-UniqueConstraint(FeatureVector.datapoint, FeatureVector.model_name, FeatureVector.type, name='feature_vectors_datapoint_model_name_type_unique')
 # There should be only one feature vector per prediction, type and model_name.
 UniqueConstraint(FeatureVector.prediction, FeatureVector.model_name, FeatureVector.type, name='feature_vectors_prediction_model_name_type_unique')
-
-# Either datapoint or prediction should be set.
-CheckConstraint(
-    (FeatureVector.datapoint != None) | (FeatureVector.prediction != None),
-    name='feature_vectors_datapoint_or_prediction_set'
-)
