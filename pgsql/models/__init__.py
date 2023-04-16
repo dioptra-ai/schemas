@@ -10,3 +10,4 @@ from . import tag
 from . import prediction
 from . import groundtruth
 from . import feature_vector
+from . import bbox

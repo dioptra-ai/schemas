@@ -18,6 +18,7 @@ class FeatureVector(Base):
     organization_id = Column(String(), nullable=False)
     type = Column(Enum(FeatureVectorType), nullable=False)
     prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id', ondelete='CASCADE'), nullable=False)
+    bbox = Column(UUID(as_uuid=True), ForeignKey('bboxes.id', ondelete='CASCADE'), nullable=True)
     encoded_value = Column(String(), nullable=True)
 
     # Ideas:
@@ -58,7 +59,9 @@ Index('feature_vector_organization_id_index', FeatureVector.organization_id)
 Index('feature_vector_type_index', FeatureVector.type)
 Index('feature_vector_model_name_index', FeatureVector.model_name)
 Index('feature_vector_prediction_index', FeatureVector.prediction)
-
+Index('feature_vector_bbox_index', FeatureVector.bbox)
 
 # There should be only one feature vector per prediction, type and model_name.
 UniqueConstraint(FeatureVector.prediction, FeatureVector.model_name, FeatureVector.type, name='feature_vectors_prediction_model_name_type_unique')
+# There should be only one feature vector per bbox, type and model_name.
+UniqueConstraint(FeatureVector.bbox, FeatureVector.model_name, FeatureVector.type, name='feature_vectors_bbox_model_name_type_unique')
