@@ -23,7 +23,7 @@ class BBox(Base):
     height = Column(Float(), nullable=True)
     width = Column(Float(), nullable=True)
     metrics = Column(JSONB, nullable=True)
-    colo_polygon = Column(ARRAY(Float()), nullable=True)
+    coco_polygon = Column(ARRAY(Float()), nullable=True)
 
     def __repr__(self):
         return f"BBox(id={self.id!r}, prediction={self.prediction!r}, groundtruth={self.groundtruth!r} class_name={self.class_name!r}, confidence={self.confidence!r}, top={self.top!r}, left={self.left!r}, height={self.height!r}, width={self.width!r})"
