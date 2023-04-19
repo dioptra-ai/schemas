@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, text, event, exc
 from sqlalchemy.orm import Session
 import json
 
-ENVIRONMENT = os.environ.get('ENVIRONMENT', 'dev')
+ENVIRONMENT = os.environ['ENVIRONMENT']
 POSTGRES_DATABASE = os.environ.get('POSTGRES_DATABASE', 'dioptra')
 POSTGRES_MAX_CONNECTIONS = int(os.environ.get('POSTGRES_MAX_CONNECTIONS', 2048))
 POSTGRES_ECHO = os.environ.get('POSTGRES_ECHO', 'false') == 'true'
