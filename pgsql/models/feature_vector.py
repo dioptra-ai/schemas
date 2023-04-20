@@ -10,6 +10,7 @@ class FeatureVectorType(enum.Enum):
     LOGITS = "LOGITS"
     PXL_ENTROPY = "PXL_ENTROPY"
     PXL_VARIANCE = "PXL_VARIANCE"
+    GRAD_EMBEDDINGS = "GRAD_EMBEDDINGS"
 
 class FeatureVector(Base):
     __tablename__ = "feature_vectors"
