@@ -16,6 +16,7 @@ class Lane(Base):
     class_names = Column(ARRAY(String()), nullable=True)
     confidence = Column(Float(), nullable=True)
     confidences = Column(ARRAY(Float()), nullable=True)
+    metrics = Column(JSONB, nullable=True)
     coco_polyline = Column(ARRAY(Float()), nullable=True)
 
     def __repr__(self):
