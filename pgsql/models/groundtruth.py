@@ -11,6 +11,7 @@ class TaskType(enum.Enum):
     NER = "NER"
     SEMANTIC_SEGMENTATION = "SEMANTIC_SEGMENTATION"
     INSTANCE_SEGMENTATION = "INSTANCE_SEGMENTATION"
+    LANE_DETECTION = "LANE_DETECTION"
 
 class GroundTruth(Base):
     __tablename__ = "groundtruths"
