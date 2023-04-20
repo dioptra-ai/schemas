@@ -14,6 +14,7 @@ class BBox(Base):
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
     class_name = Column(String(), nullable=True)
     class_names = Column(ARRAY(String()), nullable=True)
+    objectness = Column(Float(), nullable=True)
     confidence = Column(Float(), nullable=True)
     confidences = Column(ARRAY(Float()), nullable=True)
     encoded_resized_segmentation_mask = Column(String(), nullable=True)
