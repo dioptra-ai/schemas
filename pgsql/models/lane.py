@@ -12,10 +12,9 @@ class Lane(Base):
     prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id', ondelete='CASCADE'), nullable=True)
     groundtruth = Column(UUID(as_uuid=True), ForeignKey('groundtruths.id', ondelete='CASCADE'), nullable=True)
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
-    class_name = Column(String(), nullable=True)
-    class_names = Column(ARRAY(String()), nullable=True)
+    # [{name, value, confidence, values, confidences, metrics}]
+    classifications = Column(JSONB, nullable=True)
     confidence = Column(Float(), nullable=True)
-    confidences = Column(ARRAY(Float()), nullable=True)
     metrics = Column(JSONB, nullable=True)
     coco_polyline = Column(ARRAY(Float()), nullable=True)
 
