@@ -12,7 +12,7 @@ class Lane(Base):
     prediction = Column(UUID(as_uuid=True), ForeignKey('predictions.id', ondelete='CASCADE'), nullable=True)
     groundtruth = Column(UUID(as_uuid=True), ForeignKey('groundtruths.id', ondelete='CASCADE'), nullable=True)
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
-    # [{name, value, confidence, values, confidences, metrics}]
+    # [{name, class_name, confidence, class_names, confidences, metrics}]
     classifications = Column(JSONB, nullable=True)
     confidence = Column(Float(), nullable=True)
     metrics = Column(JSONB, nullable=True)
