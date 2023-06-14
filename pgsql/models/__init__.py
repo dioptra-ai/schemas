@@ -12,3 +12,4 @@ from . import groundtruth
 from . import feature_vector
 from . import bbox
 from . import lane
+from . import completion
